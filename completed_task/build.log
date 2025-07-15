@@ -1,0 +1,22 @@
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/build
+[ 50%] Building C object CMakeFiles/sqlite3.dir/sqlite3.c.o
+/home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/sqlite3.c: In function ‘sqlite3SelectNew’:
+/home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/sqlite3.c:124086:10: warning: function may return address of local variable [-Wreturn-local-addr]
+124086 |   return pNew;
+       |          ^~~~
+/home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/sqlite3.c:124046:10: note: declared here
+124046 |   Select standin;
+       |          ^~~~~~~
+In file included from /usr/include/string.h:548,
+                 from /home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/sqlite3.c:13598:
+In function ‘memcpy’,
+    inlined from ‘sqlite3Fts5IndexQuery’ at /home/timur/Documents/Трудоустройство/test_task_Infoteks/test_task_Infoteks/sqlite-amalgamation-3260000/sqlite3.c:211996:18:
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:29:10: warning: ‘__builtin_memcpy’ specified bound 18446744073709551615 exceeds maximum object size 9223372036854775807 [-Wstringop-overflow=]
+   29 |   return __builtin___memcpy_chk (__dest, __src, __len,
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   30 |                                  __glibc_objsize0 (__dest));
+      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+[100%] Linking C shared library libsqlite3.so
+[100%] Built target sqlite3
