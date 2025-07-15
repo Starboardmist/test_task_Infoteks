@@ -1,0 +1,15 @@
+FROM alpine:latest
+
+RUN apk add --no-cache \
+    build-base \
+    cmake
+
+WORKDIR /app
+
+COPY CMakeLists.txt shell.c sqlite3.c sqlite3.h sqlite3ext.h ./
+
+RUN mkdir build && cd build && \
+    cmake .. && \
+    cmake --build .
+
+CMD ["ls", "-lh", "build/libsqlite3.so"]
