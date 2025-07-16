@@ -1,7 +1,62 @@
 ---
-- name: Install Docker on Debian
+- name: Completing test task 5-7
   hosts: debian
   become: true
 
   roles:
-    - geerlingguy.docker
+        - geerlingguy.docker
+
+  tasks:
+    - name: Ensure unzip is installed
+      package:
+        name: unzip
+        state: present
+
+    - name: Ensure the project directory exists
+      file:
+        path: /opt/sqlite_project
+        state: directory
+        mode: '0755'
+
+    - name: Download archive from URL
+      get_url:
+        url: https://www.sqlite.org/2018/sqlite-amalgamation-3260000.zip
+        dest: /tmp/sqlite_project.zip
+        mode: '0644'
+
+    - name: Extract archive
+      unarchive:
+        src: /tmp/sqlite_project.zip
+        dest: /opt/sqlite_project
+        remote_src: true
+    
+    - name: Copy file CMakeLists.txt
+      copy:
+        src: ../CMakeLists.txt
+        dest: /opt/sqlite_project/sqlite-amalgamation-3260000/CMakeLists.txt
+
+    - name: Install required build packages
+      apt:
+        name:
+          - build-essential
+          - cmake
+          - libreadline-dev
+          - libncurses-dev
+        state: present
+        update_cache: true
+
+    - name: Ensure build directory exists
+      file:
+        path: /opt/sqlite_project/sqlite-amalgamation-3260000/build
+        state: directory
+        mode: '0755'
+
+    - name: Run cmake configuration step
+      command: cmake ..
+      args:
+        chdir: /opt/sqlite_project/sqlite-amalgamation-3260000/build
+
+    - name: Build the project with cmake
+      command: cmake --build .
+      args:
+        chdir: /opt/sqlite_project/sqlite-amalgamation-3260000/build
