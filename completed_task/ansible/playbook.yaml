@@ -1,0 +1,7 @@
+---
+- name: Install Docker on Debian
+  hosts: debian
+  become: true
+
+  roles:
+    - geerlingguy.docker
