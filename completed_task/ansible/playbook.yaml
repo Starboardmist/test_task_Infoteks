@@ -56,8 +56,9 @@
       args:
         chdir: /opt/sqlite_project/sqlite-amalgamation-3260000/build
 
-    - name: Build the project with cmake
-      command: cmake --build .
+    - name: Build the project and save build log
+      shell: |
+        cmake --build . 2>&1 | tee build.log
       args:
         chdir: /opt/sqlite_project/sqlite-amalgamation-3260000/build
 
